@@ -12,9 +12,11 @@ This application was created to allow a business owner to view and manage the de
 
 In order to run this application you must have <a href="https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install-windows-quick.html target="_blank">MySQL</a> installed on your machine. To install the MySql on Windows click the link and follow the directions in the MySQL documentation. Once installed you will need to use command prompt (Windows users) or Terminal (Mac users) rather that git bash to interface with MySQL commands. To confirm you have MySql installed, type <code>mysql --version</code>, then you must log into your MySQL Shell by typing the following command, <code>mysql -u root -p</code> in command prompt or terminal. Dont forget, all MySQL commands must end with a semi-colon!
 
-## Video Tutorial
+## Visuals
 
-<iframe src = "Demo/Employee-Tracker.mp4" width="640" height="480"></iframe>
+<img src = "./Demo/Employee1.png" width = 600px>
+
+<img src = "./Demo/Employee2.png" width = 600px>
 
 ## Credit
 
