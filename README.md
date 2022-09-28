@@ -14,10 +14,17 @@ In order to run this application you must have <a href="https://dev.mysql.com/do
 
 ## Video Tutorial
 
-
+<iframe src = Demo\Employee-Tracker.mp4 width="640" height="480"></iframe>
 
 ## Credit
 
+https://stackoverflow.com/questions/70319254/sql-parsing-error-when-trying-to-parse-from-prompt
+
+https://javascript.info/async-await#:~:text=The%20word%20%E2%80%9Casync%E2%80%9D%20before%20a,in%20a%20resolved%20promise%20automatically.&text=So%2C%20async%20ensures%20that%20the,wraps%20non%2Dpromises%20in%20it.
+
+https://www.w3schools.com/mySQl/default.asp
+
+https://devhints.io/mysql
 
 
 ## License 🔑
