@@ -1,12 +1,27 @@
-require('dotenv').config();
+const mysql = require("mysql2");
+const util = require("util");
 
-module.exports = {
-  client: 'mysql2',
-  connection: {
-    host: process.env.DB_HOST,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    name: process.env.DB_NAME,
-    port: process.env.DB_PORT
-  },
-};
+const connection = mysql.createConnection({
+  port     : 3306,
+  host     : 'localhost',
+  user     : 'root',
+  password : 'PrincessLeia-1',
+  database : 'employeeTracker_db',
+},
+console.log(`Connected to the employeeTracker_db database`),
+    console.log(`
+    ╔═══╗─────╔╗──────────────╔═╗╔═╗─────────────────
+    ║╔══╝─────║║──────────────║║╚╝║║─────────────────
+    ║╚══╦╗╔╦══╣║╔══╦╗─╔╦══╦══╗║╔╗╔╗╠══╦═╗╔══╦══╦══╦═╗
+    ║╔══╣╚╝║╔╗║║║╔╗║║─║║║═╣║═╣║║║║║║╔╗║╔╗╣╔╗║╔╗║║═╣╔╝
+    ║╚══╣║║║╚╝║╚╣╚╝║╚═╝║║═╣║═╣║║║║║║╔╗║║║║╔╗║╚╝║║═╣║
+    ╚═══╩╩╩╣╔═╩═╩══╩═╗╔╩══╩══╝╚╝╚╝╚╩╝╚╩╝╚╩╝╚╩═╗╠══╩╝
+    ───────║║──────╔═╝║─────────────────────╔═╝║─────
+    ───────╚╝──────╚══╝─────────────────────╚══╝─────`)
+);
+ 
+connection.connect();
+
+connection.query = util.promisify(connection.query); 
+  
+module.exports = connection; 

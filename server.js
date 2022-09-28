@@ -1,38 +1,7 @@
-// const express = require('express');
-const mysql = require('mysql2');
 const inquirer = require('inquirer');
-require('console.table');
-const config = require('./config/connection');
 const sql = require('./sql');
-const { async } = require('rxjs');
-const { allowedNodeEnvironmentFlags } = require('process');
+require("console.table")
 
-// const PORT = process.env.PORT || 3001;
-// const app = express();
-
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
-
-const db = mysql.createConnection(
-    {
-        host: process.env.DB_HOST,
-        username: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        name: process.env.DB_NAME
-    },
-    console.log(`Connected to the employeeTracker_db database`),
-    console.log(`
-    ╔═══╗─────╔╗──────────────╔═╗╔═╗─────────────────
-    ║╔══╝─────║║──────────────║║╚╝║║─────────────────
-    ║╚══╦╗╔╦══╣║╔══╦╗─╔╦══╦══╗║╔╗╔╗╠══╦═╗╔══╦══╦══╦═╗
-    ║╔══╣╚╝║╔╗║║║╔╗║║─║║║═╣║═╣║║║║║║╔╗║╔╗╣╔╗║╔╗║║═╣╔╝
-    ║╚══╣║║║╚╝║╚╣╚╝║╚═╝║║═╣║═╣║║║║║║╔╗║║║║╔╗║╚╝║║═╣║
-    ╚═══╩╩╩╣╔═╩═╩══╩═╗╔╩══╩══╝╚╝╚╝╚╩╝╚╩╝╚╩╝╚╩═╗╠══╩╝
-    ───────║║──────╔═╝║─────────────────────╔═╝║─────
-    ───────╚╝──────╚══╝─────────────────────╚══╝─────`)
-);
-
-db(config); 
 run();
 
 function run() {
@@ -47,15 +16,17 @@ function run() {
             "View All Roles",
             "Add Role",
             "View All Departments",
-            "Add Departments"
+            "Add Department"
         ]
     })
     .then((answers) => {
         switch (answers.options) {
             case "View All Employees":
-                return allEmployees();
+                 allEmployees();
+                 break;
             case "Add Employee": 
-                return addEmployee();
+                 addEmployee();
+                 break;
             case "Update Emloyee Role":
                 return updateRole();
             case "View All Roles":
@@ -64,16 +35,16 @@ function run() {
                 return addRole();
             case "View All Departments":
                 return allDepartments();
-            case "Add Departments":
-                return addDepartments();
+            case "Add Department":
+                return addDepartment();
             case "Quit":
                 return quit();
         }
-    });
+    })
 
 
 async function allEmployees() {
-    const employees = await sql.getAllEmployees();
+    const employees = await sql.allEmployees();
     console.table(employees);
     run();
 }
@@ -90,7 +61,7 @@ async function allDepartments() {
     run();
 }
 
-async function addDepartments() {
+async function addDepartment() {
     const addDep = await inquirer.prompt(
         {
             type: "input",
@@ -98,21 +69,21 @@ async function addDepartments() {
             message: "Wat is the name of the department?",
         }
     );
-    await sql.selectEmployees(addDep);
+    await sql.addDepartment(addDep.department);
     run();
 }
 
 async function addEmployee() {
     const roleOption = await sql.allRoles();
-    const employees = await sql.getAllEmployees();
+    const employees = await sql.allEmployees();
     const employeeAdd = await inquirer.prompt([
         {
-            type: "list",
+            type: "input",
             name: "first_name",
             message: "Wat is the first name of the employee?"
         },
         {
-            type: "list",
+            type: "input",
             name: "last_name",
             message: "Wat is the last name of the employee?"
         },
@@ -132,14 +103,14 @@ async function addEmployee() {
             {  
                 type: "list",
                 name: "managerId",
-                message: "Please select this new employees manager:",
+                message: "Please select this new employee's manager:",
                 choices: managerList,
             }
         );
         employeeAdd.manager_id = managerId;
     }
     employeeAdd.role_id = roleId;
-    await sql.insEmployee(employeeAdd);
+    await sql.addEmployee(employeeAdd);
     run(); 
 }
 
@@ -159,7 +130,7 @@ async function addRole() {
         },
         {
             type: "list",
-            message: "What is the department id number?",
+            message: "Which department does the role belong to?",
             name: "department_id",
             choices: departmentList,
         },
@@ -169,7 +140,7 @@ async function addRole() {
 }
 
 async function updateRole() {
-    const employeeOps = await sql.getAllEmployees();
+    const employeeOps = await sql.allEmployees();
     const roleOption = await sql.allRoles();
     console.log(roleOption);
     const employeeOptions = employeeOps.map(({ id, first_name, last_name }) => ({
@@ -196,7 +167,7 @@ async function updateRole() {
           choices: roleOps,
         },
     );
-    await sql.upEmployee(employeeId, roleId);
+    await sql.updateEmployee(employeeId, roleId);
     run();
 }
 

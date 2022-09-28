@@ -1,37 +1,37 @@
-const connection = require("./connection");
+const connection = require("./config/connection");
 
 class sql {
   constructor(connection) {
     this.connection = connection;
   }
-  selectEmployees() {
+  allEmployees() {
     return this.connection.query("SELECT * FROM employee");
   }
-  insEmployee(employee) {
-    return this.connection.query("INSERT INTO employee SET ?", employee);
+  addEmployee(employeeAdd) {
+    return this.connection.query("INSERT INTO employee SET ?", employeeAdd);
   }
 
-  upRole() {
+  updateRole() {
     return this.connection.query("UPDATE employee SET role_id = role_id WHERE first_name = name");
   }
 
-  selectRoles() {
+  allRoles() {
     return this.connection.query("SELECT id, title, salary, department_id AS role FROM role");
   }
 
-  insRole(newRole) {
+  addRole(newRole) {
     return this.connection.query("INSERT INTO role SET ?", newRole);
   }
 
-  selectDepartments() {
+  allDepartments() {
     return this.connection.query("SELECT * FROM department");
   }
 
-  insDepartment(department) {
-    return this.connection.query("INSERT INTO department SET ?", department);
+  addDepartment(addDep) {
+    return this.connection.query("INSERT INTO department (name) VALUES (?)", addDep);
   }
 
-  upEmployee(employeeId, newRoleId) {
+  updateEmployee(employeeId, newRoleId) {
     console.log("inside query");
     return this.connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [newRoleId, employeeId]);
   }

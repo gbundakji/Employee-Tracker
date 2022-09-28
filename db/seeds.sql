@@ -19,7 +19,7 @@ VALUES  ("Princess", "Leia", 1, 1),
         ("Han", "Solo", 1, null),
         ("Master", "Yoda", 2, 2),
         ("Obi Wan", "Kenobi", 2, null),
-        ("Luke", "Skywalker", 3, 3)
+        ("Luke", "Skywalker", 3, 3),
         ("R2", "D2", 3, null),
         ("Emporer", "Palpatine", 4, 4),
-        ("Darth", "Vader", 4, null);
+        ("Darth", "Vader", 4, null); 
