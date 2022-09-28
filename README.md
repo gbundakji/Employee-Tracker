@@ -14,7 +14,7 @@ In order to run this application you must have <a href="https://dev.mysql.com/do
 
 ## Video Tutorial
 
-<iframe src = Demo\Employee-Tracker.mp4 width="640" height="480"></iframe>
+<iframe src = "Demo/Employee-Tracker.mp4" width="640" height="480"></iframe>
 
 ## Credit
 
